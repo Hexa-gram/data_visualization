@@ -52,19 +52,19 @@
   <script src="./socket-client.js"></script>
   <script src='./page.js'></script>
   <script>
-    const mainData = document.getElementById('mainData');
-    const total = document.getElementById('total');
-    const active = document.getElementById('active');
-    const first = document.getElementById('first');
-    const last = document.getElementById('last');
-    const prev = document.getElementById('prev');
-    const next = document.getElementById('next');
-    const noData = document.getElementsByClassName('noData')[0];
+    var mainData = document.getElementById('mainData');
+    var total = document.getElementById('total');
+    var active = document.getElementById('active');
+    var first = document.getElementById('first');
+    var last = document.getElementById('last');
+    var prev = document.getElementById('prev');
+    var next = document.getElementById('next');
+    var noData = document.getElementsByClassName('noData')[0];
 
-    let page_now = 1;
-    let page_end = 1;
+    varpage_now = 1;
+    varpage_end = 1;
 
-    const socket = io();
+    var socket = io();
     socket.on('pageTotal', function (totalPage) {
       console.log(totalPage);
       page_end = totalPage;
@@ -104,7 +104,7 @@
     }
 
     function render(msg) {
-      let html = '<table>';
+      varhtml = '<table>';
       html +=
         `
         <tr>
@@ -115,7 +115,7 @@
         </tr>
      `;
 
-      for (let i = 0; i < msg.length; i++) {
+      for (vari = 0; i < msg.length; i++) {
         html +=
           `
           <tr>

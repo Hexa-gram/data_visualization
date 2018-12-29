@@ -1,4 +1,4 @@
-const router = require('koa-router')()
+var router = require('koa-router')()
 
 // router.prefix('/users')
 

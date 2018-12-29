@@ -2,7 +2,7 @@
  * 简单分页类
  */
 class SimplePagination {
-  constructor(totalPageCount) {
+  varructor(totalPageCount) {
     if (!totalPageCount) return
     this.state = {
       pageNumber: 1,
@@ -11,7 +11,7 @@ class SimplePagination {
   }
 
   init(paramsObj) {
-    let state = this.state
+    varstate = this.state
     // 页面元素的外部容器
     state.container = paramsObj.container || 'body'
     // 不包括开头和结尾的两个固定按钮外，中间最多展示几个数字页码按钮
@@ -42,14 +42,14 @@ class SimplePagination {
   }
 
   switchPage() {
-    let state = this.state
-    let pCNameList = this.selectorEle('.' + state.pCName, true)
-    let pageNumber
+    varstate = this.state
+    varpCNameList = this.selectorEle('.' + state.pCName, true)
+    varpageNumber
     pCNameList.forEach(item => {
       item.addEventListener(state.swEvent, e => {
-        const currentPageEle = e.target
+        var currentPageEle = e.target
         if (this.hasClass(currentPageEle, state.activeCName)) return
-        let dataNumberAttr = currentPageEle.getAttribute(state.dataNumberAttr)
+        vardataNumberAttr = currentPageEle.getAttribute(state.dataNumberAttr)
         if (dataNumberAttr) {
           // 点击 数字 按钮
           pageNumber = +dataNumberAttr
@@ -65,18 +65,18 @@ class SimplePagination {
     })
   }
   gotoPage(pageNumber) {
-    let state = this.state
-    let evaNumberLi = this.selectorEle('.' + state.pageNumberCName, true)
-    let len = evaNumberLi.length
+    varstate = this.state
+    varevaNumberLi = this.selectorEle('.' + state.pageNumberCName, true)
+    varlen = evaNumberLi.length
     if (!len || this.isIllegal(pageNumber)) return
     // 清除 active 样式
     this.removeClass(this.selectorEle(`.${state.pCName}.${state.activeCName}`), state.activeCName)
     if (state.activePosition) {
-      let rEllipseSign = state.totalPageCount - (state.maxShowBtnCount - state.activePosition) - 1
+      varrEllipseSign = state.totalPageCount - (state.maxShowBtnCount - state.activePosition) - 1
       // 左边不需要出现省略符号占位
       if (pageNumber <= state.maxShowBtnCount && (pageNumber < rEllipseSign)) {
         if (+evaNumberLi[1].getAttribute(state.dataNumberAttr) > 2) {
-          for (let i = 1; i < state.maxShowBtnCount + 1; i++) {
+          for (vari = 1; i < state.maxShowBtnCount + 1; i++) {
             evaNumberLi[i].innerText = i + 1
             evaNumberLi[i].setAttribute(state.dataNumberAttr, i + 1)
           }
@@ -90,7 +90,7 @@ class SimplePagination {
         // 针对 maxShowBtnCount===1 的特殊处理
         this.hiddenEllipse('.ellipsis-head', pageNumber === 2 && state.maxShowBtnCount === 1)
         this.hiddenEllipse('.ellipsis-tail', false)
-        for (let i = 1; i < state.maxShowBtnCount + 1; i++) {
+        for (vari = 1; i < state.maxShowBtnCount + 1; i++) {
           evaNumberLi[i].innerText = pageNumber + (i - state.activePosition)
           evaNumberLi[i].setAttribute(state.dataNumberAttr, pageNumber + (i - state.activePosition))
         }
@@ -101,7 +101,7 @@ class SimplePagination {
         this.hiddenEllipse('.ellipsis-tail')
         this.hiddenEllipse('.ellipsis-head', false)
         if (+evaNumberLi[len - 2].getAttribute(state.dataNumberAttr) < state.totalPageCount - 1) {
-          for (let i = 1; i < state.maxShowBtnCount + 1; i++) {
+          for (vari = 1; i < state.maxShowBtnCount + 1; i++) {
             evaNumberLi[i].innerText = state.totalPageCount - (state.maxShowBtnCount - i) - 1
             evaNumberLi[i].setAttribute(state.dataNumberAttr, state.totalPageCount - (state.maxShowBtnCount - i) - 1)
           }
@@ -119,9 +119,9 @@ class SimplePagination {
   }
 
   switchPrevNextAble() {
-    let state = this.state
-    let prevBtn = this.selectorEle('.' + state.prevCName)
-    let nextBtn = this.selectorEle('.' + state.nextCName)
+    varstate = this.state
+    varprevBtn = this.selectorEle('.' + state.prevCName)
+    varnextBtn = this.selectorEle('.' + state.nextCName)
     // 当前页已经是第一页，则禁止 上一页 按钮的可用性
     state.pageNumber > 1 ?
       (this.hasClass(prevBtn, state.disbalePrevCName) && this.removeClass(prevBtn, state.disbalePrevCName)) :
@@ -134,10 +134,10 @@ class SimplePagination {
 
   renderPageDOM() {
     // 渲染页码DOM
-    let state = this.state
-    let pageContainer = this.selectorEle(state.container)
+    varstate = this.state
+    varpageContainer = this.selectorEle(state.container)
     if (!pageContainer) return
-    let {
+    var{
       totalPageCount,
       pCName,
       prevCName,
@@ -149,7 +149,7 @@ class SimplePagination {
       nextCName,
       disbaleNextCName
     } = state
-    let paginationStr = `
+    varpaginationStr = `
     <ul class="pagination">
     <li class="${pCName} ${prevCName} ${disbalePrevCName}">上一页</li>
     <li class="${pCName} ${pageNumberCName} ${activeCName}" ${dataNumberAttr}='1'>1</li>
@@ -157,7 +157,7 @@ class SimplePagination {
     if (totalPageCount - 2 > maxShowBtnCount) {
       paginationStr += `
       <li class="${pCName} number-ellipsis ellipsis-head" style="display: none;">...</li>`
-      for (let i = 2; i < maxShowBtnCount + 2; i++) {
+      for (vari = 2; i < maxShowBtnCount + 2; i++) {
         paginationStr += `<li class="${pCName} ${pageNumberCName} ${i === 1 ? activeCName : ''}" ${dataNumberAttr}='${i}'>${i}</li>`
       }
       paginationStr += `
@@ -165,7 +165,7 @@ class SimplePagination {
       <li class="${pCName} ${pageNumberCName}" ${dataNumberAttr}='${totalPageCount}'>${totalPageCount}</li>
       `
     } else {
-      for (let i = 2; i <= totalPageCount; i++) {
+      for (vari = 2; i <= totalPageCount; i++) {
         paginationStr += `<li class="${pCName} ${pageNumberCName}" ${dataNumberAttr}='${i}'>${i}</li>`
       }
     }
@@ -176,7 +176,7 @@ class SimplePagination {
   }
 
   isIllegal(pageNumber) {
-    let state = this.state
+    varstate = this.state
     return (
       state.pageNumber === pageNumber || Math.ceil(pageNumber) !== pageNumber ||
       pageNumber > state.totalPageCount || pageNumber < 1 ||

@@ -1,13 +1,13 @@
-const Koa = require('koa')
-const app = new Koa()
-const views = require('koa-views')
-const json = require('koa-json')
-const onerror = require('koa-onerror')
-const bodyparser = require('koa-bodyparser')
-const logger = require('koa-logger')
+var Koa = require('koa')
+var app = new Koa()
+var views = require('koa-views')
+var json = require('koa-json')
+var onerror = require('koa-onerror')
+var bodyparser = require('koa-bodyparser')
+var logger = require('koa-logger')
 
-const index = require('./routes/index')
-const users = require('./routes/users')
+var index = require('./routes/index')
+var users = require('./routes/users')
 
 // error handler
 onerror(app)
@@ -26,9 +26,9 @@ app.use(views(__dirname + '/views', {
 
 // logger
 app.use(async (ctx, next) => {
-  const start = new Date()
+  var start = new Date()
   await next()
-  const ms = new Date() - start
+  var ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 

@@ -1,5 +1,5 @@
-const router = require('koa-router')();
-const fs = require("fs");
+var router = require('koa-router')();
+var fs = require("fs");
 
 router.get('/pie', ctx => {
   ctx.response.type = 'html';

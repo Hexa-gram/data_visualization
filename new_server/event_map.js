@@ -1,4 +1,4 @@
-const event_map = {
+var event_map = {
   'HTTP_Protocol_Validation': {
     name: 'HTTP协议违背',
     index: 0

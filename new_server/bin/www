@@ -25,8 +25,8 @@ var server = http.createServer(app);
 /**
  * Socket server
  */
-const io = require('socket.io')(server);
-const socket_connect = require('../routes/socket_connect');
+var io = require('socket.io')(server);
+var socket_connect = require('../routes/socket_connect');
 
 /**
  * UDP server

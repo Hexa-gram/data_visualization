@@ -56,7 +56,7 @@
     };
     myChart.setOption(option);
     
-    const socket = io();
+    var socket = io();
     socket.on('pie', function (msg) {
       console.log(msg);
       option.series.data = msg;
