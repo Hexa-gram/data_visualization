@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="main" style="width: 600px;height:400px;"></div>
+  <script src="./socket-client.js"></script>
+  <script src="./echarts.min.js"></script>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+      title: {
+        text: '事件类型分布图',
+        subtext: '数据来自syslog',
+        x: 'center'
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+      },
+      legend: {
+        orient: 'vertical',
+        left: '0%',
+        top: '10%',
+        // data: ['HTTP协议违背', 'Web服务器漏洞攻击', 'Web插件漏洞攻击', '爬虫事件', '恶意扫描', '跨站请求伪造',
+        //   '文件非法上传', '跨站脚本攻击', 'SQL注入攻击', 'LDAP注入攻击', 'SSI指令', 'XPath注入攻击', '命令注入攻击',
+        //   '路径穿越攻击', '远程文件包含', '目录索引', '信息泄露', '内容过滤', '非法下载', '自定义攻击', 'HTTP访问控制事件',
+        //   '智能补丁', '资源盗链', 'Cookie篡改', '违背白名单', 'WebShell页面访问', '敏感信息过滤', 'SSL加载', '暴利破解攻击'
+        // ]
+      },
+      series: {
+        name: '访问来源',
+        type: 'pie',
+        radius: '55%',
+        center: ['60%', '60%'],
+        data: [{
+          value: 0,
+          name: 'HTTP协议违背',
+          event: 'Info_Leak',
+        }],
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    };
+    myChart.setOption(option);
+    
+    const socket = io();
+    socket.on('pie', function (msg) {
+      console.log(msg);
+      option.series.data = msg;
+      myChart.setOption(option);
+    });
+  </script>
+</body>
+
+</html>

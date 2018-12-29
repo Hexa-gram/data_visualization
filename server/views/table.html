@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>table</title>
+  <style>
+    .pager {
+      display: flex;
+      align-items: center;
+    }
+
+    .pager_btn {
+      margin-right: 5px;
+      border: 1px solid #000;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    .pager_btn_disable {
+      cursor: not-allowed;
+    }
+
+    .tableInfo {
+      margin: 20px 0;
+      border: 1px solid #000;
+    }
+
+    .noData {
+      text-align: center;
+      margin: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>实时事件</div>
+  <div class="tableInfo">
+    <div id="mainData">
+
+    </div>
+    <div class="noData">暂无数据</div>
+  </div>
+  <div class="pager">
+    <div class="pager_btn" id="first">首页</div>
+    <div class="pager_btn" id="prev">上一页</div>
+    <div class="pager_btn" id="next">下一页</div>
+    <div class="pager_btn" id="last">末页</div>
+    <div> <span id="active">1</span>/<span id="total">1</span>页</div>
+  </div>
+  <script src="./socket-client.js"></script>
+  <script src='./page.js'></script>
+  <script>
+    const mainData = document.getElementById('mainData');
+    const total = document.getElementById('total');
+    const active = document.getElementById('active');
+    const first = document.getElementById('first');
+    const last = document.getElementById('last');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const noData = document.getElementsByClassName('noData')[0];
+
+    let page_now = 1;
+    let page_end = 1;
+
+    const socket = io();
+    socket.on('pageTotal', function (totalPage) {
+      console.log(totalPage);
+      page_end = totalPage;
+      total.innerHTML = totalPage;
+      checkDisable();
+      page_now == 1 ? socket.emit('pageNum', 1) : null;
+    });
+
+    socket.on('pageData', function (msg) {
+      if (msg.length < 1) {
+        noData.style.display = 'block';
+        mainData.style.display = 'none';
+      } else {
+        noData.style.display = 'none';
+        render(msg);
+      }
+    });
+
+    socket.emit('pageNum', 1);
+
+    function checkDisable() {
+      if (page_now == 1) {
+        first.className = "pager_btn pager_btn_disable";
+        prev.className = "pager_btn pager_btn_disable";
+      } else {
+        first.className = "pager_btn";
+        prev.className = "pager_btn";
+      }
+      if (page_now == page_end) {
+        last.className = "pager_btn pager_btn_disable";
+        next.className = "pager_btn pager_btn_disable";
+      } else {
+        last.className = "pager_btn";
+        next.className = "pager_btn";
+      }
+      active.innerHTML = page_now;
+    }
+
+    function render(msg) {
+      let html = '<table>';
+      html +=
+        `
+        <tr>
+          <th>开始时间</th>
+          <th>事件类型</th>
+          <th>服务器IP地址</th>
+          <th>URL</th>
+        </tr>
+     `;
+
+      for (let i = 0; i < msg.length; i++) {
+        html +=
+          `
+          <tr>
+            <td>${msg[i].start_time}</td>
+            <td>${msg[i].name}</td>
+            <td>${msg[i].ip}</td>
+            <td>${msg[i].url}</td>
+          </tr>
+        `
+      }
+      html += '</table>';
+      mainData.innerHTML = html;
+      mainData.style.display = 'block';
+    }
+
+    first.onclick = function () {
+      if (page_now <= 1) {
+        return;
+      } else {
+        page_now = 1;
+        socket.emit('pageNum', 1);
+        checkDisable();
+      }
+    }
+    last.onclick = function () {
+      if (page_now >= page_end) {
+        return
+      } else {
+        page_now = page_end;
+        socket.emit('pageNum', page_end);
+        checkDisable()
+      }
+    }
+    prev.onclick = function () {
+      if (page_now <= 1) {
+        return
+      } else {
+        --page_now;
+        socket.emit('pageNum', page_now);
+        checkDisable()
+      }
+    }
+    next.onclick = function () {
+      if (page_now >= page_end) {
+        return
+      } else {
+        ++page_now;
+        socket.emit('pageNum', page_now);
+        checkDisable()
+      }
+    }
+  </script>
+</body>
+
+</html>
