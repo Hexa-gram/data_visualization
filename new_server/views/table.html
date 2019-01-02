@@ -13,9 +13,17 @@
 
     .pager_btn {
       margin-right: 5px;
-      border: 1px solid #000;
       padding: 5px;
       cursor: pointer;
+      color: #fff;
+      background-color: #409eff;
+      border: 1px solid #409eff;
+    }
+
+    .pager_btn:active {
+      color: #fff;
+      background: #3a8ee6;
+      border-color: #3a8ee6;
     }
 
     .pager_btn_disable {
@@ -24,12 +32,29 @@
 
     .tableInfo {
       margin: 20px 0;
-      border: 1px solid #000;
+      border: 1px solid #ebeef5;
     }
 
     .noData {
       text-align: center;
       margin: 40px;
+    }
+
+    #mainData th {
+      text-align: left;
+      color: #909399;
+      height: 40px;
+      padding-left: 10px;
+    }
+
+    #mainData td {
+      height: 40px;
+      color: #606266;
+      padding-left: 10px;
+    }
+
+    #mainData tbody:nth-child(2) tr:hover {
+      background-color: #f5f7fa;
     }
   </style>
 </head>
@@ -104,7 +129,7 @@
     }
 
     function render(msg) {
-      var html = '<table>';
+      var html = '<table style="width:100%;" cellspacing="0" cellpadding="0" border="0">';
       html +=
         `
         <tr>
@@ -113,6 +138,7 @@
           <th>服务器IP地址</th>
           <th>URL</th>
         </tr>
+        <tbody>
      `;
 
       for (var i = 0; i < msg.length; i++) {
@@ -126,7 +152,7 @@
           </tr>
         `
       }
-      html += '</table>';
+      html += '</tbody></table>';
       mainData.innerHTML = html;
       mainData.style.display = 'block';
     }

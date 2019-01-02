@@ -35,7 +35,7 @@ var socket_connect = require('../routes/socket_connect');
 var dgrm = require('dgram');
 var udp = dgrm.createSocket('udp4');//udp4为指定UDP通信的协议类型
 
-udp.bind(514, '0.0.0.0', function () {
+udp.bind(3001, '0.0.0.0', function () {
   //bind方法中也可以不写回调函数，单独监听listening事件
   // var address = udp.address();
   // console.log('服务器开始监听。地址信息为&j', address);
