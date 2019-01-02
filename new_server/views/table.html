@@ -61,8 +61,8 @@
     var next = document.getElementById('next');
     var noData = document.getElementsByClassName('noData')[0];
 
-    varpage_now = 1;
-    varpage_end = 1;
+    var page_now = 1;
+    var page_end = 1;
 
     var socket = io();
     socket.on('pageTotal', function (totalPage) {
@@ -104,7 +104,7 @@
     }
 
     function render(msg) {
-      varhtml = '<table>';
+      var html = '<table>';
       html +=
         `
         <tr>
@@ -115,7 +115,7 @@
         </tr>
      `;
 
-      for (vari = 0; i < msg.length; i++) {
+      for (var i = 0; i < msg.length; i++) {
         html +=
           `
           <tr>

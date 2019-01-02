@@ -55,9 +55,10 @@
 
     };
     myChart.setOption(option);
-    
+
     var socket = io();
     socket.on('bar', function (msg) {
+      socket.emit('test', 123);
       console.log(msg);
       option.series.data = msg;
       myChart.setOption(option);
