@@ -5,74 +5,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>table</title>
-  <style>
-    .pager {
-      display: flex;
-      align-items: center;
-    }
-
-    .pager_btn {
-      margin-right: 5px;
-      padding: 5px;
-      cursor: pointer;
-      color: #fff;
-      background-color: #409eff;
-      border: 1px solid #409eff;
-    }
-
-    .pager_btn:active {
-      color: #fff;
-      background: #3a8ee6;
-      border-color: #3a8ee6;
-    }
-
-    .pager_btn_disable {
-      cursor: not-allowed;
-    }
-
-    .tableInfo {
-      margin: 20px 0;
-      border: 1px solid #ebeef5;
-    }
-
-    .noData {
-      text-align: center;
-      margin: 40px;
-    }
-
-    #mainData th {
-      text-align: left;
-      color: #909399;
-      height: 40px;
-      padding-left: 10px;
-    }
-
-    #mainData td {
-      height: 40px;
-      color: #606266;
-      padding-left: 10px;
-    }
-
-    #mainData tbody:nth-child(2) tr:hover {
-      background-color: #f5f7fa;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="./stylesheets/base.css">
 </head>
 
 <body>
-  <div>实时事件</div>
-  <div class="tableInfo">
-    <div id="mainData">
+  <div class="bgImg">
+    <div class="tableTitle">实时事件</div>
+    <div class="tableInfo">
+      <div id="mainData">
 
+      </div>
+      <div class="noData">暂无数据</div>
     </div>
-    <div class="noData">暂无数据</div>
-  </div>
-  <div class="pager">
-    <div class="pager_btn" id="first">首页</div>
-    <div class="pager_btn" id="prev">上一页</div>
-    <div class="pager_btn" id="next">下一页</div>
-    <div class="pager_btn" id="last">末页</div>
-    <div> <span id="active">1</span>/<span id="total">1</span>页</div>
+    <div class="pager">
+      <div class="pager_btn" id="first">首页</div>
+      <div class="pager_btn" id="prev">上一页</div>
+      <div class="pager_btn" id="next">下一页</div>
+      <div class="pager_btn" id="last">末页</div>
+      <div> <span id="active">1</span>/<span id="total">1</span>页</div>
+    </div>
   </div>
   <script src="./socket-client.js"></script>
   <script src='./page.js'></script>

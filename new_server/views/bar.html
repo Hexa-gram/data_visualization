@@ -6,10 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="./stylesheets/base.css">
 </head>
 
 <body>
-  <div id="main" style="width: 600px;height:400px;"></div>
+  <div class="bgImg">
+    <div id="main" style="width: 600px;height:400px;"></div>
+  </div>
   <script src="./echarts.min.js"></script>
   <script src="./socket-client.js"></script>
   <script type="text/javascript">
@@ -20,7 +23,10 @@
     var option = {
       title: {
         text: '最近一小时发生事件',
-        subtext: '数据来自syslog'
+        subtext: '数据来自syslog',
+        textStyle: {
+          color: '#fff'
+        }
       },
       tooltip: {
         trigger: 'axis',
@@ -36,10 +42,32 @@
       },
       xAxis: {
         type: 'value',
+        axisLabel: {
+          show: true,
+          textStyle: {
+            color: '#fff'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#fff',
+          }
+        },
         boundaryGap: [0, 0.01]
       },
       yAxis: {
         type: 'category',
+        axisLabel: {
+          show: true,
+          textStyle: {
+            color: '#fff'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#fff',
+          }
+        },
         data: ['HTTP协议违背', 'Web服务器漏洞攻击', 'Web插件漏洞攻击', '爬虫事件', '恶意扫描', '跨站请求伪造',
           '文件非法上传', '跨站脚本攻击', 'SQL注入攻击', 'LDAP注入攻击', 'SSI指令', 'XPath注入攻击', '命令注入攻击',
           '路径穿越攻击', '远程文件包含', '目录索引', '信息泄露', '内容过滤', '非法下载', '自定义攻击', 'HTTP访问控制事件',
@@ -50,7 +78,12 @@
         // name: '2011年',
         type: 'bar',
         // data: [18203, 23489, 29034, 104970, 131744, 630230]
-        data: [0]
+        data: [0],
+        itemStyle: {
+          normal: {
+            color: '#fff',
+          }
+        },
       }
 
     };

@@ -6,10 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="./stylesheets/base.css">
 </head>
 
 <body>
-  <div id="main" style="width: 600px;height:400px;"></div>
+  <div class="bgImg">
+    <div id="main" style="width: 600px;height:400px;"></div>
+  </div>
   <script src="./socket-client.js"></script>
   <script src="./echarts.min.js"></script>
   <script type="text/javascript">
@@ -19,7 +22,10 @@
       title: {
         text: '事件类型分布图',
         subtext: '数据来自syslog',
-        x: 'center'
+        // x: 'center',
+        textStyle: {
+          color: '#fff'
+        }
       },
       tooltip: {
         trigger: 'item',
@@ -28,7 +34,10 @@
       legend: {
         orient: 'vertical',
         left: '0%',
-        top: '10%',
+        top: '15%',
+        textStyle: {
+          color: '#fff'
+        },
         data: ['HTTP协议违背', 'Web服务器漏洞攻击', 'Web插件漏洞攻击', '爬虫事件', '恶意扫描', '跨站请求伪造',
           '文件非法上传', '跨站脚本攻击', 'SQL注入攻击', 'LDAP注入攻击', 'SSI指令', 'XPath注入攻击', '命令注入攻击',
           '路径穿越攻击', '远程文件包含', '目录索引', '信息泄露', '内容过滤', '非法下载', '自定义攻击', 'HTTP访问控制事件',
@@ -45,17 +54,34 @@
           name: 'HTTP协议违背',
           event: 'Info_Leak',
         }],
-        itemStyle: {
-          emphasis: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
+        label: {
+          normal: {
+            textStyle: {
+              color: '#fff'
+            }
           }
-        }
+        },
+        labelLine: {
+          normal: {
+            lineStyle: {
+              color: 'rgba(255, 255, 255, 0.3)'
+            },
+            smooth: 0.2,
+            length: 10,
+            length2: 20
+          }
+        },
+        // itemStyle: {
+        //   normal: {
+        //     color: '#c23531',
+        //     shadowBlur: 200,
+        //     shadowColor: 'rgba(0, 0, 0, 0.5)'
+        //   }
+        // },
       }
     };
     myChart.setOption(option);
-    
+
     var socket = io();
     socket.on('pie', function (msg) {
       console.log(msg);

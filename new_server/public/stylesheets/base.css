@@ -1,0 +1,71 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.bgImg {
+  background: url('../img/bg.png');
+  padding: 10px;
+  color: #fff;
+  height: calc(100% - 20px);
+}
+
+/*table*/
+.tableTitle {
+  font-family: 'sans-serif', 'serif', 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei';
+  font-size: 18px;
+  font-weight: 600;
+  padding: 5px;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+}
+
+.pager_btn {
+  margin-right: 5px;
+  padding: 5px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #409eff;
+  border: 1px solid #409eff;
+}
+
+.pager_btn:active {
+  color: #fff;
+  background: #3a8ee6;
+  border-color: #3a8ee6;
+}
+
+.pager_btn_disable {
+  cursor: not-allowed;
+}
+
+.tableInfo {
+  margin: 10px 0;
+  /* border: 1px solid #ebeef5; */
+}
+
+.noData {
+  text-align: center;
+  margin: 35px;
+}
+
+#mainData th {
+  text-align: left;
+  height: 35px;
+  padding-left: 10px;
+}
+
+#mainData td {
+  height: 35px;
+  padding-left: 10px;
+}
+
+
+#mainData tbody:nth-child(2) tr:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}

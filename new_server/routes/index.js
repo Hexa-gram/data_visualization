@@ -15,7 +15,8 @@ router.get('/table', function (req, res, next) {
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.redirect('/table');
+  // res.redirect('/all');
+  res.render('all');
 });
 
 module.exports = router;
