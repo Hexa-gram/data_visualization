@@ -52,6 +52,7 @@ var connect = function (io, udp) { //socket udp
     var pageTotal = Math.ceil(tableData.length / 10);
     io.emit('pageTotal', pageTotal == 0 ? 1 : pageTotal);
   }
+
   // socket连接
   io.on('connection', (socket) => {
     console.log('socket start');
@@ -133,17 +134,17 @@ var connect = function (io, udp) { //socket udp
   }, 1000);
 
 
-  setTimeout(() => {
-    for (var i = 0; i < 50; i++) {
-      checkTableData({
-        name: i,
-        start_time: +new Date() + i * 100,
-        ip: '10.16.60.' + (40 + i),
-        url: 'www.baidu.com'
-      });
-    }
-    console.log('set Data')
-  }, 5000)
+  // setTimeout(() => {
+  //   for (var i = 0; i < 50; i++) {
+  //     checkTableData({
+  //       name: i,
+  //       start_time: +new Date() + i * 100,
+  //       ip: '10.16.60.' + (40 + i),
+  //       url: 'www.baidu.com'
+  //     });
+  //   }
+  //   console.log('set Data')
+  // }, 5000)
 }
 
 module.exports = connect;
