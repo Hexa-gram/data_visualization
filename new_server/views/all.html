@@ -177,13 +177,13 @@
     var socket = io();
     socket.on('pie', function (msg) {
       console.log(msg);
-      // pieOption.series.data = msg;
-      // pieChart.setOption(pieOption);
+      pieOption.series.data = msg;
+      pieChart.setOption(pieOption);
     });
     socket.on('bar', function (msg) {
       console.log(msg);
-      // barOption.series.data = msg;
-      // barChart.setOption(barOption);
+      barOption.series.data = msg;
+      barChart.setOption(barOption);
     });
   </script>
   <script>

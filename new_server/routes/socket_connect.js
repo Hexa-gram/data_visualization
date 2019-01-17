@@ -91,9 +91,9 @@ var connect = function (io, udp) { //socket udp
       var ts = msg.split(" ")[0];
       var name = msg.match(eventReg)[0].slice(11).trim() //格式化取出的value
       checkChartData(ts, name);
-      var start_time = /stat_time:.*?\s\s/.test(msg) ? msg.match(/stat_time:.*?\s\s/).slice(10).trim() : "";
-      var ip = /dst_ip:.*?\s/.test(msg) ? msg.match(/dst_ip:.*?\s/).slice(7).trim() : "";
-      var url = /domain:.*?\s/.test(msg) ? msg.match(/domain:.*?\s/).slice(7).trim() : "";
+      var start_time = /stat_time:.*?\s\s/.test(msg) ? msg.match(/stat_time:.*?\s\s/)[0].slice(10).trim() : "";
+      var ip = /dst_ip:.*?\s/.test(msg) ? msg.match(/dst_ip:.*?\s/)[0].slice(7).trim() : "";
+      var url = /domain:.*?\s/.test(msg) ? msg.match(/domain:.*?\s/)[0].slice(7).trim() : "";
       checkTableData({
         name: name,
         start_time: start_time,
