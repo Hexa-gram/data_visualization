@@ -56,9 +56,8 @@ var connect = function (io, udp) { //socket udp
   // socket连接
   io.on('connection', (socket) => {
     console.log('socket start');
-    var pageTotal = Math.ceil(tableData.length / 10);
+    
     sendData();
-    io.emit('pageTotal', pageTotal == 0 ? 1 : pageTotal);
 
     socket.on('test', (msg) => {
       console.log(msg)
@@ -81,6 +80,8 @@ var connect = function (io, udp) { //socket udp
       console.log('socket disconnected');
     });
   });
+  var pageTotal = Math.ceil(tableData.length / 10);
+  io.emit('pageTotal', pageTotal == 0 ? 1 : pageTotal);
 
   //udp
   udp.on('message', function (msg, rinfo) { //rinfo 数据来源信息{address,port,size,family}

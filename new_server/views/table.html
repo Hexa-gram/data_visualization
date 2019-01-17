@@ -41,12 +41,13 @@
     var page_end = 1;
 
     var socket = io();
+    socket.emit('pageNum', 1);
     socket.on('pageTotal', function (totalPage) {
       console.log(totalPage);
       page_end = totalPage;
       total.innerHTML = totalPage;
       checkDisable();
-      page_now == 1 ? socket.emit('pageNum', 1) : null;
+      socket.emit('pageNum', page_now)
     });
 
     socket.on('pageData', function (msg) {
@@ -59,7 +60,7 @@
       }
     });
 
-    socket.emit('pageNum', 1);
+   
 
     function checkDisable() {
       if (page_now == 1) {
